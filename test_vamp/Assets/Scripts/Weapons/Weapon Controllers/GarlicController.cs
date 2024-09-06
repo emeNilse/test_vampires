@@ -11,7 +11,7 @@ public class GarlicController : WeaponController
     }
 
     
-    protected override void Update()
+    protected override void Attack()
     {
         base.Attack();
         GameObject spawnedGarlic = Instantiate(prefab);
