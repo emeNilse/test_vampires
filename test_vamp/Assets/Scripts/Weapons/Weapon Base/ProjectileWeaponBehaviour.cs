@@ -4,8 +4,24 @@ using UnityEngine;
 // base script for all projectile behaviours (to be placed in the prefab of a weapon that is a projectile)
 public class ProjectileWeaponBehaviour : MonoBehaviour
 {
+    public WeaponsScriptableObjects weaponData;
+
     protected Vector3 direction;
     public float destroyAfterSeconds;
+
+    //current stats
+    protected float currentDamage;
+    protected float currentSpeed;
+    protected float currentCooldownDuration;
+    protected int currentPierce;
+
+    void Awake()
+    {
+        currentDamage = weaponData.Damage;
+        currentSpeed = weaponData.Speed;
+        currentCooldownDuration = weaponData.CooldownDuration;
+        currentPierce = weaponData.Pierce;
+    }
 
     protected virtual void Start()
     {
@@ -58,5 +74,25 @@ public class ProjectileWeaponBehaviour : MonoBehaviour
 
         transform.localScale = scale;
         transform.rotation = Quaternion.Euler(rotation); //cannot simply place the vector because it cannot convert???
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D col)
+    {
+        //Reference the script from the collided collider and deal damage using TakeDamage()
+        if(col.CompareTag("Enemy"))
+        {
+            EnemyStats enemy = col.GetComponent<EnemyStats>();
+            enemy.TakeDamage(currentDamage); // use currentDamage, instead of weaponData.damage, in case of any damage multipliers added in the future
+            ReducePierce();
+        }
+    }
+
+    void ReducePierce() //destroy once pierce reaches 0, as in hiting a target
+    {
+        currentPierce--;
+        if (currentPierce <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
