@@ -9,7 +9,9 @@ public class EnemyMovement : MonoBehaviour
    
     void Start()
     {
-       player = FindObjectOfType<playermovement>().transform;
+        player = FindObjectOfType<playermovement>().transform;
+
+        // player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
    
@@ -17,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, player.position, enemyData.MoveSpeed * Time.deltaTime); //constantly move enemy towards player
         
+        // a different version of moving towards the player
         //distance = Vector2.Distance(transform.position, player.transform.position);
         //Vector2 direction = player.transform.position - transform.forward;
     }
