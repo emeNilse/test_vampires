@@ -15,6 +15,7 @@ public class playermovement : MonoBehaviour
     public Vector2 moveDir;
     [HideInInspector]
     public Vector2 lastMovedVector;
+    [SerializeField] Transform swordParent;
     
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,7 @@ public class playermovement : MonoBehaviour
     void Update()
     {
         InputManagement();
+        //SwordRotate();
     }
 
     private void FixedUpdate()
@@ -58,10 +60,20 @@ public class playermovement : MonoBehaviour
             lastMovedVector = new Vector2(lastHorizontalVector, lastVerticalVector); //while moving
         }
 
+        //if (Input.GetKey(KeyCode.Space))
+        //{
+            //SwordRotate();
+        //}
+        
     }
 
     void Move()
     {
         rb.velocity = new Vector2(moveDir.x * moveSpeed, moveDir.y * moveSpeed);
     }
+
+    //void SwordRotate()
+    //{
+      //  swordParent.Rotate(-Vector3.forward, 360 * Time.deltaTime);
+    //}
 }
