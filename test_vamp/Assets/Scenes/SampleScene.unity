@@ -301,7 +301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &686864407
 Transform:
   m_ObjectHideFlags: 0
@@ -375,7 +375,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swarmPrefab: {fileID: 6198437555937834083, guid: cb993f06eb381d142b6f5adbf7160438, type: 3}
-  swarmInterval: 3.5
+  shooterPrefab: {fileID: 3617479562865637466, guid: 4ec894c26567c7f4381dbf2b78d9b98c, type: 3}
+  swarmInterval: 2
+  shooterInterval: 4
 --- !u!1 &1327217920
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1726406875
 Transform:
   m_ObjectHideFlags: 0

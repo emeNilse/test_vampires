@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject swarmPrefab;
+    [SerializeField] GameObject swarmPrefab;
+    [SerializeField] GameObject shooterPrefab;
 
-    [SerializeField]
-    private float swarmInterval = 3.5f;
+    [SerializeField] float swarmInterval;
+    [SerializeField] float shooterInterval;
 
     void Start()
     {
         StartCoroutine(spawnEnemny(swarmInterval, swarmPrefab));
+        StartCoroutine(spawnEnemny(shooterInterval, shooterPrefab));
     }
 
     
@@ -22,4 +23,5 @@ public class EnemySpawner : MonoBehaviour
         GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(-5f, 5f), Random.Range(-6f, 6f), 0), Quaternion.identity);
         StartCoroutine(spawnEnemny(interval, enemy));
     }
+
 }

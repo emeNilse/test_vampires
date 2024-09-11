@@ -177,9 +177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: fb0f77d3c30149542a1aa8228215078f, type: 2}
-  lineOfSight: 4.37
-  shootingRange: 2.36
-  runAway: 0
+  lineOfSight: 9.1
+  shootingRange: 5.9
+  runAway: 4.28
   fireRate: 1
   bullet: {fileID: 4599600454334365823, guid: 448b6f71c6c670949be1468c17de3205, type: 3}
   bulletParent: {fileID: 1294202657068556720}

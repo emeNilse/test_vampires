@@ -2,24 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordController : WeaponController
+public class SwordController : MonoBehaviour
 {
-    
 
-   // private RaycastHit2D[] hits;
+    [Header("Weapon Stats")]
+    public WeaponsScriptableObjects weaponData;
+    float currentCooldown = 0;
 
-    protected override void Start()
+    private void Update()
     {
-        base.Start();
-    }
-
-
-    protected override void Attack()
-    {
-        base.Attack();
-        GameObject spawnedSword = Instantiate(weaponData.Prefab);
-        spawnedSword.transform.position = new Vector3(-0.02f, 1.61f, 0); //assign the position to be the same as this object which is parented to the player
-        spawnedSword.transform.parent = transform; //so that it spawns below this object
+        currentCooldown -= Time.deltaTime; //cooldown is zero at start
+        if (currentCooldown <= 0 &&  Input.GetKeyDown(KeyCode.Space))
+        {
+            GameObject spawnedSword = Instantiate(weaponData.Prefab);
+            spawnedSword.transform.position = new Vector3(transform.parent.position.x + -0.02f, transform.parent.position.y + 1.61f, transform.parent.position.z + 0); //assign the position to be the same as this object which is parented to the player
+            spawnedSword.transform.parent = transform; //so that it spawns below this object
+            currentCooldown = weaponData.CooldownDuration; //set cooldown
+        }
     }
 
 }
