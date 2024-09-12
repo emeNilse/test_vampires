@@ -7,7 +7,8 @@ public class EnemyMovementRadius : MonoBehaviour
     public EnemyScriptableObject enemyData;
     Transform player;
     public float lineOfSight;
-    
+    private bool markedPlayer;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -17,7 +18,12 @@ public class EnemyMovementRadius : MonoBehaviour
     void Update()
     {
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
-        if (distanceFromPlayer < lineOfSight)
+        if (distanceFromPlayer <= lineOfSight && !markedPlayer)
+        {
+            transform.position = Vector2.MoveTowards(this.transform.position, player.position, enemyData.MoveSpeed * Time.deltaTime);
+            markedPlayer = true;
+        }
+        else if (markedPlayer)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, player.position, enemyData.MoveSpeed * Time.deltaTime);
         }
