@@ -156,7 +156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &309375702
 Transform:
   m_ObjectHideFlags: 0
@@ -171,6 +171,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 448288292}
+  - {fileID: 2113625692}
   m_Father: {fileID: 1690835661}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &448288292 stripped
@@ -755,6 +756,106 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 745182d16c3dfc64e8749718ed3a0aa7, type: 2}
+--- !u!1 &2113625690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2113625692}
+  - component: {fileID: 2113625691}
+  - component: {fileID: 2113625693}
+  m_Layer: 0
+  m_Name: Cross Bow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &2113625691
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113625690}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 293234117
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 1283488800, guid: 2b132d18f9d527446a3416f5384bc994, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.8125, y: 0.8125}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &2113625692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113625690}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.9235818, w: 0.3834016}
+  m_LocalPosition: {x: -0.01, y: 0.93, z: 0}
+  m_LocalScale: {x: 0.6192, y: 0.6827, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 309375702}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -134.911}
+--- !u!114 &2113625693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113625690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c020953ceeb2aba408ddc7ed0461820a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bowParent: {fileID: 309375702}
+  arrow: {fileID: 1539100794200485459, guid: 1d6d35ae4c310d047bb95381982985f0, type: 3}
+  fireRate: 1
 --- !u!1001 &1781020162760595720
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -766,6 +867,10 @@ PrefabInstance:
     - target: {fileID: 4971674781124102739, guid: 91d85940408c23548b541e839266acf6, type: 3}
       propertyPath: m_Name
       value: Sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971674781124102739, guid: 91d85940408c23548b541e839266acf6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8078560547480680470, guid: 91d85940408c23548b541e839266acf6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -842,11 +947,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7044003480384023814, guid: 4ec894c26567c7f4381dbf2b78d9b98c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.5879436
+      value: -4.64
       objectReference: {fileID: 0}
     - target: {fileID: 7044003480384023814, guid: 4ec894c26567c7f4381dbf2b78d9b98c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.2267911
+      value: -2.25
       objectReference: {fileID: 0}
     - target: {fileID: 7044003480384023814, guid: 4ec894c26567c7f4381dbf2b78d9b98c, type: 3}
       propertyPath: m_LocalPosition.z

@@ -30,6 +30,7 @@ public class EnemyShooter : MonoBehaviour
         }
         else if (distanceFromPlayer <= shootingRange && nextFireTime < Time.time)
         {
+            //transform.RotateAround(player.position, Vector3.forward, 720 * Time.deltaTime); Attempt at rotation around the player
             Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
             nextFireTime = Time.time + fireRate;
         }
