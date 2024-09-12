@@ -122,25 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &93360503 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6198437555937834083, guid: cb993f06eb381d142b6f5adbf7160438, type: 3}
-  m_PrefabInstance: {fileID: 5784418747523147446}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &93360504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 93360503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c6f31276f56cea46b8a9ba9ecdc2314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 590abf8862cd82844ac756ef660f1a06, type: 2}
-  lineOfSight: 3.42
 --- !u!1 &309375701
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bowParent: {fileID: 309375702}
   arrow: {fileID: 1539100794200485459, guid: 1d6d35ae4c310d047bb95381982985f0, type: 3}
-  fireRate: 1
+  fireRate: 0
 --- !u!1001 &1781020162760595720
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1053,10 +1034,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6198437555937834083, guid: cb993f06eb381d142b6f5adbf7160438, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 93360504}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb993f06eb381d142b6f5adbf7160438, type: 3}
 --- !u!1001 &6368586931536883740
 PrefabInstance:

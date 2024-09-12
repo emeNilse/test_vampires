@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cross Bow Arrow Weapon
   m_EditorClassIdentifier: 
   prefab: {fileID: 1539100794200485459, guid: 1d6d35ae4c310d047bb95381982985f0, type: 3}
-  damage: 10
+  damage: 2
   speed: 3
   cooldownDuration: 0
   pierce: 0
