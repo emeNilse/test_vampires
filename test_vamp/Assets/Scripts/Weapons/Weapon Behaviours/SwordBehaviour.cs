@@ -41,6 +41,15 @@ public class SwordBehaviour : MonoBehaviour
 
             markedEnemies.Add(col.gameObject); //mark the enemy, so that it won't suffer damage more than once per garlic summon
         }
+        else if (col.CompareTag("Prop"))
+        {
+            if (col.gameObject.TryGetComponent(out BreakableProps breakable))
+            {
+                breakable.TakeDamage(weaponData.Damage);
+
+                markedEnemies.Add(col.gameObject);
+            }
+        }
     }
 
 }

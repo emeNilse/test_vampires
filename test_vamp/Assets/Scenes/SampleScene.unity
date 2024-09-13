@@ -478,6 +478,7 @@ GameObject:
   - component: {fileID: 1690835663}
   - component: {fileID: 1690835662}
   - component: {fileID: 1690835664}
+  - component: {fileID: 1690835665}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -542,12 +543,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e75d986b8cc8184c9b9b77f7d192d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  characterData: {fileID: 11400000, guid: 34215132ac1c3304f9c304eb04ae343d, type: 2}
   lastHorizontalVector: 0
   lastVerticalVector: 0
   moveDir: {x: 0, y: 0}
   lastMovedVector: {x: 0, y: 0}
-  swordParent: {fileID: 309375702}
 --- !u!50 &1690835659
 Rigidbody2D:
   serializedVersion: 4
@@ -686,12 +686,29 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690835656}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d744076dd698474496e5c30ab3af182, type: 3}
+  m_Script: {fileID: 11500000, guid: c4b8047a204549743a14847e5bdc6af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 0}
+  characterData: {fileID: 11400000, guid: 34215132ac1c3304f9c304eb04ae343d, type: 2}
+  experience: 0
+  level: 1
+  experienceCap: 100
+  experienceCapIncrease: 100
+  invincibilityDuration: 1
+--- !u!114 &1690835665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690835656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9654f14aa9d118942887332f7a0a20d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1726406874
 GameObject:
   m_ObjectHideFlags: 0

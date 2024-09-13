@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class playermovement : MonoBehaviour
 {
-    //Movement
-    public float moveSpeed;
+    // References
     Rigidbody2D rb;
+    public CharacterScriptableObject characterData;
+
+    //Movement
     [HideInInspector]
     public float lastHorizontalVector;
     [HideInInspector]
@@ -15,16 +17,16 @@ public class playermovement : MonoBehaviour
     public Vector2 moveDir;
     [HideInInspector]
     public Vector2 lastMovedVector;
-    [SerializeField] Transform swordParent;
+    //[SerializeField] Transform swordParent;
     
-    // Start is called before the first frame update
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         lastMovedVector = new Vector2(1, 0f); //so that knife has movement at start of game and if player doesn't move
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         InputManagement();
@@ -69,7 +71,7 @@ public class playermovement : MonoBehaviour
 
     void Move()
     {
-        rb.velocity = new Vector2(moveDir.x * moveSpeed, moveDir.y * moveSpeed);
+        rb.velocity = new Vector2(moveDir.x * characterData.MoveSpeed, moveDir.y * characterData.MoveSpeed);
     }
 
     //void SwordRotate()

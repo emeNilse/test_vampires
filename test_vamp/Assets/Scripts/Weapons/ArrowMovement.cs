@@ -41,6 +41,14 @@ public class ArrowMovement : MonoBehaviour
             enemy.TakeDamage(weaponData.Damage);
             ReducePierce();
         }
+        else if(col.CompareTag("Prop"))
+        {
+            if(col.gameObject.TryGetComponent(out BreakableProps breakable))
+            {
+                breakable.TakeDamage(weaponData.Damage);
+                ReducePierce();
+            }
+        }
     }
 
     void ReducePierce() //destroy once pierce reaches 0, as in hiting a target
