@@ -22,14 +22,17 @@ public class EnemyShooter : MonoBehaviour
 
     void Update()
     {
+       
+
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
-        if(distanceFromPlayer < lineOfSight && distanceFromPlayer > shootingRange)
+        //transform.RotateAround(player.position, Vector3.forward, 20 * Time.deltaTime);
+        if (distanceFromPlayer < lineOfSight && distanceFromPlayer > shootingRange)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, player.position, enemyData.MoveSpeed * Time.deltaTime);
         }
         else if (distanceFromPlayer <= shootingRange && nextFireTime < Time.time)
         {
-            //transform.RotateAround(player.position, Vector3.forward, 720 * Time.deltaTime); Attempt at rotation around the player
+            //Attempt at rotation around the player
             Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
             nextFireTime = Time.time + fireRate;
         }

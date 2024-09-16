@@ -25,7 +25,6 @@ public class playermovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         lastMovedVector = new Vector2(1, 0f); //so that knife has movement at start of game and if player doesn't move
     }
-
     
     void Update()
     {

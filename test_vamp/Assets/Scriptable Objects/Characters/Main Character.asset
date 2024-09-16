@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d989d1f2ac66c341884527ff38d65a4, type: 3}
   m_Name: Main Character
   m_EditorClassIdentifier: 
-  maxHealth: 1000
+  maxHealth: 100
   recovery: 0
   moveSpeed: 5
   might: 0

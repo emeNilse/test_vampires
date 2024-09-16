@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
     public CharacterScriptableObject characterData;
+    [SerializeField] Image HealthBar;
+    [SerializeField] Image XPBar;
 
     //current stats
     float currentHealth;
@@ -27,12 +30,14 @@ public class PlayerStats : MonoBehaviour
         currentMoveSpeed = characterData.MoveSpeed;
         currentMight = characterData.Might;
         currentProjectileSpeed = characterData.ProjectileSpeed;
+        HealthBar.fillAmount = (float)currentHealth / (float)characterData.MaxHealth;
+        XPBar.fillAmount = (float)experience / (float)experienceCap;
     }
 
     public void IncreaseExperience(int amount)
     {
         experience += amount;
-
+        XPBar.fillAmount = (float)experience / (float)experienceCap;
         LevelUpChecker();
     }
 
@@ -43,6 +48,7 @@ public class PlayerStats : MonoBehaviour
             level++;
             experience -= experienceCap;
             experienceCap += experienceCapIncrease;
+            XPBar.fillAmount = (float)experience / (float)experienceCap;
         }
     }
 
@@ -69,7 +75,7 @@ public class PlayerStats : MonoBehaviour
         if(!isInvincible)
         {
             currentHealth -= damage;
-
+            HealthBar.fillAmount = (float)currentHealth / (float)characterData.MaxHealth;
             invincibilityTimer = invincibilityDuration;
             isInvincible = true;
 
@@ -90,8 +96,9 @@ public class PlayerStats : MonoBehaviour
         if(currentHealth < characterData.MaxHealth)
         {
             currentHealth += amount;
+            HealthBar.fillAmount = (float)currentHealth / (float)characterData.MaxHealth;
 
-            if(currentHealth > characterData.MaxHealth)
+            if (currentHealth > characterData.MaxHealth)
             {
                 currentHealth = characterData.MaxHealth;
             }

@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5086581376025174150}
   - component: {fileID: 954343048491719062}
   - component: {fileID: 5346343287406537716}
+  - component: {fileID: 2417512202658907071}
   m_Layer: 0
   m_Name: Shooter
   m_TagString: Enemy
@@ -177,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: fb0f77d3c30149542a1aa8228215078f, type: 2}
-  lineOfSight: 9.1
+  lineOfSight: 7.16
   shootingRange: 5.9
   runAway: 4.28
   fireRate: 1
@@ -196,3 +197,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: fb0f77d3c30149542a1aa8228215078f, type: 2}
+--- !u!114 &2417512202658907071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3617479562865637466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c207bafffe737c545a493f5368d7fe68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drops:
+  - name: XP Gem
+    itemPrefab: {fileID: 1506918838627526434, guid: e4134c858a9db4e4982d7aaeffd7ebe9, type: 3}
+    dropRate: 100
