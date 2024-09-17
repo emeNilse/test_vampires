@@ -11,11 +11,11 @@ public class WeaponController : MonoBehaviour
     public WeaponsScriptableObjects weaponData;
     float currentCooldown;
 
-    protected playermovement pm;
+    protected Player pm;
 
     protected virtual void Start()
     {
-        pm = FindObjectOfType<playermovement>();
+        pm = FindObjectOfType<Player>();
         currentCooldown = weaponData.CooldownDuration; //at the start set the weapon cooldown to be the cooldown duration
     }
 

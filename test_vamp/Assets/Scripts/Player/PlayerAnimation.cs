@@ -7,14 +7,14 @@ public class PlayerAnimation : MonoBehaviour
 
     //references
     Animator am;
-    playermovement pm;
+    Player pm;
     SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
     {
         am = GetComponent<Animator>();
-        pm = GetComponent<playermovement>();
+        pm = GetComponent<Player>();
         sr = GetComponent<SpriteRenderer>();
     }
 

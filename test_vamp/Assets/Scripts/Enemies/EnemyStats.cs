@@ -11,8 +11,6 @@ public class EnemyStats : MonoBehaviour
     float currentHealth;
     float currentDamage;
 
-
-    
     void Awake()
     {
         currentMoveSpeed = enemyData.MoveSpeed;
@@ -29,7 +27,7 @@ public class EnemyStats : MonoBehaviour
             Dead();
         }
     }
-    public void Dead()
+    public virtual void Dead()
     {
         Destroy(gameObject);
     }

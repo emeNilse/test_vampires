@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class EnemyMovementRadius : MonoBehaviour
+public class MeleeEnemy : EnemyStats
 {
-    public EnemyScriptableObject enemyData;
-    Transform player;
+    public UnityEvent<MeleeEnemy> OnKilled;
+    //public EnemyScriptableObject enemyData;
+    public Transform player;
     public float lineOfSight;
     private bool markedPlayer;
 
@@ -15,7 +17,7 @@ public class EnemyMovementRadius : MonoBehaviour
     }
 
     
-    void Update()
+    public void UpdateMeleeEnemy()
     {
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
         if (distanceFromPlayer <= lineOfSight && !markedPlayer)
@@ -28,6 +30,13 @@ public class EnemyMovementRadius : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, player.position, enemyData.MoveSpeed * Time.deltaTime);
         }
     }
+
+    public override void Dead()
+    {
+        OnKilled.Invoke(this);
+    }
+
+
 
     private void OnDrawGizmosSelected()
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playermovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     // References
     Rigidbody2D rb;
@@ -26,7 +26,7 @@ public class playermovement : MonoBehaviour
         lastMovedVector = new Vector2(1, 0f); //so that knife has movement at start of game and if player doesn't move
     }
     
-    void Update()
+    public void PlayerUpdate()
     {
         InputManagement();
         //SwordRotate();

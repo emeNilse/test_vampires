@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class EnemyShooter : MonoBehaviour
+public class RangedEnemy : EnemyStats
 {
-
-    public EnemyScriptableObject enemyData;
+    public UnityEvent<RangedEnemy> OnKilled;
+    //public EnemyScriptableObject enemyData;
     public float lineOfSight;
     public float shootingRange;
     public float runAway;
@@ -13,14 +14,14 @@ public class EnemyShooter : MonoBehaviour
     private float nextFireTime;
     public GameObject bullet;
     public GameObject bulletParent;
-    private Transform player;
+    public Transform player;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    void Update()
+    public void UpdateRangedEnemy()
     {
        
 
@@ -41,6 +42,12 @@ public class EnemyShooter : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, player.position, -enemyData.MoveSpeed * Time.deltaTime);
         }
     }
+
+    public override void Dead()
+    {
+        OnKilled.Invoke(this);
+    }
+
 
     private void OnDrawGizmosSelected()
     {
