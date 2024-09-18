@@ -10,7 +10,7 @@ public class CrossBowBehaviour : MonoBehaviour
     public float fireRate = 1f;
     private float nextFireTime;
 
-    void Update()
+    public void CrossBowUpdate()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 bowDir = mousePos - (Vector2)bowParent.position;

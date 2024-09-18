@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Singleton
     public static GameManager Instance;
     private void Awake()
     {
         if (Instance != null) Debug.LogError("[Enemymanager] Singleton already exists");
         Instance = this;
     }
+    #endregion
 
     [SerializeField] EnemyManager myEnemyManager;
     [SerializeField] Player myPlayer;

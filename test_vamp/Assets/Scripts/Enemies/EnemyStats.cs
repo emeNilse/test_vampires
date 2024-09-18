@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyStats : MonoBehaviour
 {
     public EnemyScriptableObject enemyData;
+    public UnityEvent<EnemyStats> OnKilled;
+    public Transform findplayer;
 
     //current stats
     float currentMoveSpeed;
@@ -18,6 +21,11 @@ public class EnemyStats : MonoBehaviour
         currentDamage = enemyData.Damage;
     }
 
+    public virtual void UpdateEnemy()
+    {
+
+    }
+
     public void TakeDamage(float dmg)
     {
         currentHealth -= dmg;
@@ -27,8 +35,9 @@ public class EnemyStats : MonoBehaviour
             Dead();
         }
     }
-    public virtual void Dead()
+    public void Dead()
     {
+        OnKilled.Invoke(this);
         Destroy(gameObject);
     }
 

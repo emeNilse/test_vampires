@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class RangedEnemy : EnemyStats
 {
-    public UnityEvent<RangedEnemy> OnKilled;
-    //public EnemyScriptableObject enemyData;
     public float lineOfSight;
     public float shootingRange;
     public float runAway;
@@ -14,22 +12,21 @@ public class RangedEnemy : EnemyStats
     private float nextFireTime;
     public GameObject bullet;
     public GameObject bulletParent;
-    public Transform player;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    public void UpdateRangedEnemy()
+    public override void UpdateEnemy()
     {
        
 
-        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+        float distanceFromPlayer = Vector2.Distance(findplayer.position, transform.position);
         //transform.RotateAround(player.position, Vector3.forward, 20 * Time.deltaTime);
         if (distanceFromPlayer < lineOfSight && distanceFromPlayer > shootingRange)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.position, enemyData.MoveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position, findplayer.position, enemyData.MoveSpeed * Time.deltaTime);
         }
         else if (distanceFromPlayer <= shootingRange && nextFireTime < Time.time)
         {
@@ -39,13 +36,8 @@ public class RangedEnemy : EnemyStats
         }
         else if(distanceFromPlayer <= runAway)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.position, -enemyData.MoveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position, findplayer.position, -enemyData.MoveSpeed * Time.deltaTime);
         }
-    }
-
-    public override void Dead()
-    {
-        OnKilled.Invoke(this);
     }
 
 

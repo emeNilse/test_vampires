@@ -5,35 +5,32 @@ using UnityEngine.Events;
 
 public class MeleeEnemy : EnemyStats
 {
-    public UnityEvent<MeleeEnemy> OnKilled;
     //public EnemyScriptableObject enemyData;
-    public Transform player;
+    //public Transform player = findplayer;
     public float lineOfSight;
     private bool markedPlayer;
+    
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
+        
     }
 
     
-    public void UpdateMeleeEnemy()
+    public override void UpdateEnemy()
     {
-        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+        
+        float distanceFromPlayer = Vector2.Distance(findplayer.position, transform.position);
         if (distanceFromPlayer <= lineOfSight && !markedPlayer)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.position, enemyData.MoveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position, findplayer.position, enemyData.MoveSpeed * Time.deltaTime);
             markedPlayer = true;
         }
         else if (markedPlayer)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.position, enemyData.MoveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position, findplayer.position, enemyData.MoveSpeed * Time.deltaTime);
         }
-    }
-
-    public override void Dead()
-    {
-        OnKilled.Invoke(this);
     }
 
 

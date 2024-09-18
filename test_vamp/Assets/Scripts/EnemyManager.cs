@@ -4,67 +4,52 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    List<EnemyStats> enemies = new List<EnemyStats>(); //enemy base
+    List<EnemyStats> enemies = new List<EnemyStats>(); //list of all enemies present
     
 
-    public GameObject prefab;
+    public List<GameObject> enemyPrefabs;
     [SerializeField] Transform playerPosition;
 
-    public float EnemyMeleeSpawnDistance = 0;
-    public float EnemyMeleeSpawnrate = 0;
-    public float NextEnemyMeleeSpawn = 0;
-    public float EnemyRangedSpawnDistance = 0;
-    public float EnemyRangedSpawnrate = 0;
-    public float NextEnemyRangedSpawn = 0;
+    public float EnemySpawnDistance = 0;
+    public float EnemySpawnrate = 0;
+    public float NextEnemySpawn = 0;
 
     public void EnemyUpdate()
     {
-        if (NextEnemyMeleeSpawn >= 0.5)
+        if (NextEnemySpawn >= 0.5)
         {
-            SpawnMeleeRandom(); //Figure out the enemy spawn for both melee and ranged
-            NextEnemyMeleeSpawn = 0;
+            SpawnEnemy();
+            NextEnemySpawn = 0;
         }
         else
         {
-            NextEnemyMeleeSpawn += Time.deltaTime * EnemyMeleeSpawnrate;
-        }
-
-        if (NextEnemyRangedSpawn >= 0.5)
-        {
-            SpawnRangedRandom();
-            NextEnemyRangedSpawn = 0;
-        }
-        else
-        {
-            NextEnemyRangedSpawn += Time.deltaTime * EnemyRangedSpawnrate;
+            NextEnemySpawn += Time.deltaTime * EnemySpawnrate;
         }
 
 
-        //update bats
-        foreach (MeleeEnemy enemy in enemies)
+        //update bats and towers
+        foreach (EnemyStats enemy in enemies)
         {
-            enemy.UpdateMeleeEnemy();
-        }
-        //update towers
-        foreach (RangedEnemy enemy in enemies)
-        {
-            enemy.UpdateRangedEnemy();
+            enemy.UpdateEnemy();
         }
     }
 
-    public void SpawnRandom()
+    public Vector3 SpawnRandom()
     {
         Vector3 spawnPos = Random.insideUnitCircle.normalized;
-        spawnPos *= EnemyMeleeSpawnDistance;
-        SpawnEnemy(playerPosition.position + spawnPos);
+        spawnPos *= EnemySpawnDistance;
+        spawnPos += playerPosition.position;
+        return spawnPos;
     }
 
-    public void SpawnEnemy(Vector3 aPosition)
+    public void SpawnEnemy()
     {
-        GameObject e = Instantiate(prefab, aPosition, Quaternion.identity);
-        e. = playerPosition; //figure out how to call the position of the player so that the enemy updates can track it
-        enemies.Add(e);
-        e.OnKilled.AddListener(EnemyKilled);
+        Vector3 aPosition = SpawnRandom();
+        int randEnemy = Random.Range(0, enemyPrefabs.Count);
+        GameObject e = Instantiate(enemyPrefabs[randEnemy], aPosition, Quaternion.identity);
+        e.GetComponent<EnemyStats>().findplayer = playerPosition; 
+        enemies.Add(e.GetComponent<EnemyStats>());
+        e.GetComponent<EnemyStats>().OnKilled.AddListener(EnemyKilled);
     }
 
 

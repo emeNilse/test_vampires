@@ -9,7 +9,7 @@ public class SwordController : MonoBehaviour
     public WeaponsScriptableObjects weaponData;
     float currentCooldown = 0;
 
-    private void Update()
+    public void SwordUpdate()
     {
         currentCooldown -= Time.deltaTime; //cooldown is zero at start
         if (currentCooldown <= 0 &&  Input.GetKeyDown(KeyCode.Space))
