@@ -8,6 +8,7 @@ public class EnemyStats : MonoBehaviour
     public EnemyScriptableObject enemyData;
     public UnityEvent<EnemyStats> OnKilled;
     public Transform findplayer;
+    [SerializeField] GameObject explode;
 
     //current stats
     float currentMoveSpeed;
@@ -38,6 +39,7 @@ public class EnemyStats : MonoBehaviour
     public void Dead()
     {
         OnKilled.Invoke(this);
+        Instantiate(explode, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

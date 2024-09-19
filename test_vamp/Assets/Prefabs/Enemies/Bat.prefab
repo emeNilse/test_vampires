@@ -185,6 +185,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   findplayer: {fileID: 0}
+  explode: {fileID: 2417670893398712364, guid: 2ba00c36dc4724a4397065b5d3f435fb, type: 3}
   lineOfSight: 3.43
 --- !u!114 &6748978038101230271
 MonoBehaviour:

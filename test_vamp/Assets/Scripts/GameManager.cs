@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] EnemyManager myEnemyManager;
     [SerializeField] Player myPlayer;
+    [SerializeField] GameObject myPauseCanvas;
 
     public enum GameState
     {
@@ -29,7 +30,8 @@ public class GameManager : MonoBehaviour
         switch (State)
         {
             case 0:
-
+                //Time.timeScale = 1; // I know I shouldn't but I'm frustrated
+                myPauseCanvas.SetActive(false);
                 myPlayer.PlayerUpdate();
                 myEnemyManager.EnemyUpdate();
 
@@ -41,6 +43,8 @@ public class GameManager : MonoBehaviour
                 return;
 
             case 1:
+                //Time.timeScale = 0; // I know I shouldn't but I'm frustrated
+                myPauseCanvas.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     State = 0;

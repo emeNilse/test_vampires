@@ -19,18 +19,13 @@ public class BulletMovement : MonoBehaviour
         bulletRB.velocity = moveDir;
         Destroy(this.gameObject, 2);
     }
-    public void Update()
+    public void Update() //this is how I stop the bullets in pause without timescale
     {
         if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale != 0f)
         {
             bulletRB.velocity = new Vector2(0f, 0f);
-            //Time.timeScale = 0f;
+            
         }
-        //else if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 0f)
-        //{
-          //  bulletRB.velocity = moveDir;
-           // Time.timeScale = 1f;
-        //}
     }
     private void OnCollisionEnter2D(Collision2D col)
     {

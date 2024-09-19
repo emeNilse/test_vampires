@@ -8,9 +8,11 @@ public class PlayerStats : MonoBehaviour
     public CharacterScriptableObject characterData;
     [SerializeField] Image HealthBar;
     [SerializeField] Image XPBar;
+    [SerializeField] Text Level;
 
     //current stats
     float currentHealth;
+    float maxHealth;
     float currentRecovery;
     float currentMoveSpeed;
     float currentMight;
@@ -21,11 +23,15 @@ public class PlayerStats : MonoBehaviour
     public int level = 1;
     public int experienceCap = 100;
     public int experienceCapIncrease;
+    public int healthIncrease = 10;
+    public int speedIncrease = 1;
+    public int mightIncrease = 2;
 
     void Awake()
     {
         // assign variables
         currentHealth = characterData.MaxHealth;
+        maxHealth = characterData.MaxHealth;
         currentRecovery = characterData.Recovery;
         currentMoveSpeed = characterData.MoveSpeed;
         currentMight = characterData.Might;
@@ -49,6 +55,8 @@ public class PlayerStats : MonoBehaviour
             experience -= experienceCap;
             experienceCap += experienceCapIncrease;
             XPBar.fillAmount = (float)experience / (float)experienceCap;
+            maxHealth += healthIncrease; //Max health increase when level up
+            currentHealth = maxHealth; //full health restored when level up
         }
     }
 
@@ -75,7 +83,7 @@ public class PlayerStats : MonoBehaviour
         if(!isInvincible)
         {
             currentHealth -= damage;
-            HealthBar.fillAmount = (float)currentHealth / (float)characterData.MaxHealth;
+            HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
             invincibilityTimer = invincibilityDuration;
             isInvincible = true;
 
@@ -93,14 +101,14 @@ public class PlayerStats : MonoBehaviour
 
     public void RestoreHealth(float amount)
     {
-        if(currentHealth < characterData.MaxHealth)
+        if(currentHealth < maxHealth)
         {
             currentHealth += amount;
-            HealthBar.fillAmount = (float)currentHealth / (float)characterData.MaxHealth;
+            HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
 
-            if (currentHealth > characterData.MaxHealth)
+            if (currentHealth > maxHealth)
             {
-                currentHealth = characterData.MaxHealth;
+                currentHealth = maxHealth;
             }
         }
         
