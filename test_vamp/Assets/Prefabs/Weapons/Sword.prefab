@@ -99,6 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 301f2d48a72808648a55ff33ae80ad69, type: 2}
+  playerLevel: 0
+  extraDamage: 5
+  addDamage: 0
   rotationSpeed: 0.5
 --- !u!60 &-6620354895045745807
 PolygonCollider2D:

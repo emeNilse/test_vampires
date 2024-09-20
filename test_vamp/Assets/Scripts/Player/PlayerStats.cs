@@ -1,14 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
     public CharacterScriptableObject characterData;
+    public string LevelText
+    {
+        get => levelText; 
+        private set
+        {
+            levelText = value;
+            LevelDisplay.GetComponent<TMP_Text>().text = value;
+        }
+    }
     [SerializeField] Image HealthBar;
     [SerializeField] Image XPBar;
-    [SerializeField] Text Level;
+    [SerializeField] GameObject LevelDisplay;
 
     //current stats
     float currentHealth;
@@ -27,7 +37,12 @@ public class PlayerStats : MonoBehaviour
     public int speedIncrease = 1;
     public int mightIncrease = 2;
 
-    void Awake()
+    //add sword damage on level up
+    public float extraDamage = 5.0f;
+    public float addDamage = 0f;
+
+
+    void Start()
     {
         // assign variables
         currentHealth = characterData.MaxHealth;
@@ -38,6 +53,7 @@ public class PlayerStats : MonoBehaviour
         currentProjectileSpeed = characterData.ProjectileSpeed;
         HealthBar.fillAmount = (float)currentHealth / (float)characterData.MaxHealth;
         XPBar.fillAmount = (float)experience / (float)experienceCap;
+        LevelText = "Lvl: " + level.ToString();
     }
 
     public void IncreaseExperience(int amount)
@@ -57,12 +73,20 @@ public class PlayerStats : MonoBehaviour
             XPBar.fillAmount = (float)experience / (float)experienceCap;
             maxHealth += healthIncrease; //Max health increase when level up
             currentHealth = maxHealth; //full health restored when level up
+            UpdateText();
+            addDamage += extraDamage;
         }
+    }
+
+    public void UpdateText()
+    {
+        LevelText = "Lvl: " + level.ToString();
     }
 
     void Update()
     {
-        if(invincibilityTimer > 0)
+        
+        if (invincibilityTimer > 0)
         {
             invincibilityTimer -= Time.deltaTime;
         }
@@ -77,6 +101,7 @@ public class PlayerStats : MonoBehaviour
     public float invincibilityDuration;
     float invincibilityTimer;
     bool isInvincible;
+    private string levelText;
 
     public void takeDamage(float damage)
     {

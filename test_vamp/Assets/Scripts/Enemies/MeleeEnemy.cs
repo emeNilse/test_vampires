@@ -21,7 +21,8 @@ public class MeleeEnemy : EnemyStats
     
     public override void UpdateEnemy()
     {
-        am.SetTrigger("TriggerAnimation"); //this stops the enemy animation, but it is delayed by one loop when pause is activated
+        //am.SetTrigger("TriggerAnimation"); 
+        //this stops the enemy animation, but it is delayed by one loop when pause is activated
         //am.SetBool("BatMove", false);
         float distanceFromPlayer = Vector2.Distance(findplayer.position, transform.position);
         if (distanceFromPlayer <= lineOfSight && !markedPlayer)
