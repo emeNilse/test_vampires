@@ -16,9 +16,19 @@ public class PlayerStats : MonoBehaviour
             LevelDisplay.GetComponent<TMP_Text>().text = value;
         }
     }
+    public string HealthText
+    {
+        get => healthText;
+        private set
+        {
+            healthText = value;
+            HealthDisplay.GetComponent<TMP_Text>().text = value;
+        }
+    }
     [SerializeField] Image HealthBar;
     [SerializeField] Image XPBar;
     [SerializeField] GameObject LevelDisplay;
+    [SerializeField] GameObject HealthDisplay;
 
     //current stats
     float currentHealth;
@@ -54,6 +64,7 @@ public class PlayerStats : MonoBehaviour
         HealthBar.fillAmount = (float)currentHealth / (float)characterData.MaxHealth;
         XPBar.fillAmount = (float)experience / (float)experienceCap;
         LevelText = "Lvl: " + level.ToString();
+        HealthText = "HP: " + currentHealth.ToString() + "/" + maxHealth.ToString();
     }
 
     public void IncreaseExperience(int amount)
@@ -73,6 +84,7 @@ public class PlayerStats : MonoBehaviour
             XPBar.fillAmount = (float)experience / (float)experienceCap;
             maxHealth += healthIncrease; //Max health increase when level up
             currentHealth = maxHealth; //full health restored when level up
+            HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
             UpdateText();
             addDamage += extraDamage;
         }
@@ -81,6 +93,7 @@ public class PlayerStats : MonoBehaviour
     public void UpdateText()
     {
         LevelText = "Lvl: " + level.ToString();
+        HealthText = "HP: " + currentHealth.ToString() + "/" + maxHealth.ToString(); 
     }
 
     void Update()
@@ -102,6 +115,7 @@ public class PlayerStats : MonoBehaviour
     float invincibilityTimer;
     bool isInvincible;
     private string levelText;
+    private string healthText;
 
     public void takeDamage(float damage)
     {
@@ -111,6 +125,7 @@ public class PlayerStats : MonoBehaviour
             HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
             invincibilityTimer = invincibilityDuration;
             isInvincible = true;
+            UpdateText();
 
             if (currentHealth <= 0)
             {
@@ -130,10 +145,12 @@ public class PlayerStats : MonoBehaviour
         {
             currentHealth += amount;
             HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
+            UpdateText();
 
             if (currentHealth > maxHealth)
             {
                 currentHealth = maxHealth;
+                UpdateText();
             }
         }
         
