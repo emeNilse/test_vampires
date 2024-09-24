@@ -1114,7 +1114,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 293234117
-  m_SortingOrder: 0
+  m_SortingOrder: 30
   m_TargetDisplay: 0
 --- !u!224 &1176529431
 RectTransform:
@@ -2003,7 +2003,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1511758464
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2623,6 +2623,8 @@ MonoBehaviour:
   extraDamage: 5
   addDamage: 0
   invincibilityDuration: 1
+  flashColor: {r: 0, g: 0, b: 0, a: 0}
+  numberOfFlashes: 4
 --- !u!114 &1690835665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2944,7 +2946,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3167,7 +3169,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 53.958
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4953798366214996530, guid: 91d85940408c23548b541e839266acf6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

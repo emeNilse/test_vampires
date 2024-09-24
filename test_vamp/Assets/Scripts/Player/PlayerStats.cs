@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerStats : MonoBehaviour
 {
     public CharacterScriptableObject characterData;
+    private SpriteFlash _spriteFlash;
     public string LevelText
     {
         get => levelText; 
@@ -51,6 +52,15 @@ public class PlayerStats : MonoBehaviour
     public float extraDamage = 5.0f;
     public float addDamage = 0f;
 
+    //I-Frames
+    [Header("I-Frames")]
+    public float invincibilityDuration;
+    public Color flashColor;
+    public int numberOfFlashes;
+    float invincibilityTimer;
+    bool isInvincible;
+    private string levelText;
+    private string healthText;
 
     void Start()
     {
@@ -61,8 +71,12 @@ public class PlayerStats : MonoBehaviour
         currentMoveSpeed = characterData.MoveSpeed;
         currentMight = characterData.Might;
         currentProjectileSpeed = characterData.ProjectileSpeed;
+        _spriteFlash = GetComponent<SpriteFlash>();
+
         HealthBar.fillAmount = (float)currentHealth / (float)characterData.MaxHealth;
         XPBar.fillAmount = (float)experience / (float)experienceCap;
+
+
         LevelText = "Lvl: " + level.ToString();
         HealthText = "HP: " + currentHealth.ToString() + "/" + maxHealth.ToString();
     }
@@ -98,7 +112,7 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-        
+        //Invincibility when taking damage
         if (invincibilityTimer > 0)
         {
             invincibilityTimer -= Time.deltaTime;
@@ -109,13 +123,7 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    //I-Frames
-    [Header("I-Frames")]
-    public float invincibilityDuration;
-    float invincibilityTimer;
-    bool isInvincible;
-    private string levelText;
-    private string healthText;
+    
 
     public void takeDamage(float damage)
     {
@@ -125,6 +133,7 @@ public class PlayerStats : MonoBehaviour
             HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
             invincibilityTimer = invincibilityDuration;
             isInvincible = true;
+            //StartCoroutine(_spriteFlash.FlashCoroutine(invincibilityDuration, flashColor, numberOfFlashes));
             UpdateText();
 
             if (currentHealth <= 0)
