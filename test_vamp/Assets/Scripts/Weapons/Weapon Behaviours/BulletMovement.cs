@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,6 +10,9 @@ public class BulletMovement : MonoBehaviour
     public WeaponsScriptableObjects weaponData;
     Rigidbody2D bulletRB;
     Vector2 moveDir;
+    Vector2 sineWave;
+    public float freq = 5f;
+    public float magn = 1f;
 
 
     public void Start()
@@ -16,6 +20,7 @@ public class BulletMovement : MonoBehaviour
         bulletRB = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player");
         moveDir = (target.transform.position - transform.position).normalized * weaponData.Speed;
+        //sineWave = transform.position * Mathf.Sin(Time.time * freq) * magn;  I tried to make the bullets move in sine waves
         bulletRB.velocity = moveDir;
         Destroy(this.gameObject, 2);
     }

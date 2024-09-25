@@ -16,7 +16,7 @@ public class SwordController : MonoBehaviour
         {
             GameObject spawnedSword = Instantiate(weaponData.Prefab);
             spawnedSword.transform.position = new Vector3(transform.parent.position.x + -0.02f, transform.parent.position.y + 1.61f, transform.parent.position.z + 0); //assign the position to be the same as this object which is parented to the player
-            spawnedSword.transform.parent = transform; //so that it spawns below this object
+            spawnedSword.transform.parent = transform; //so that it spawns below this object in the hierachy and becomes the sword controller's child
             currentCooldown = weaponData.CooldownDuration; //set cooldown
         }
     }

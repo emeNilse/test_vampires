@@ -12,6 +12,7 @@ public class RangedEnemy : EnemyStats
     private float nextFireTime;
     public GameObject bullet;
     public GameObject bulletParent;
+    
 
     void Start()
     {
@@ -23,14 +24,14 @@ public class RangedEnemy : EnemyStats
        
 
         float distanceFromPlayer = Vector2.Distance(findplayer.position, transform.position);
-        //transform.RotateAround(player.position, Vector3.forward, 20 * Time.deltaTime);
+        //transform.RotateAround(player.position, Vector3.forward, 20 * Time.deltaTime); Attempt at rotation around the player
         if (distanceFromPlayer < lineOfSight && distanceFromPlayer > shootingRange)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, findplayer.position, enemyData.MoveSpeed * Time.deltaTime);
         }
         else if (distanceFromPlayer <= shootingRange && nextFireTime < Time.time)
         {
-            //Attempt at rotation around the player
+            // make code so bullet spawns "outside" of shooter
             Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
             nextFireTime = Time.time + fireRate;
         }

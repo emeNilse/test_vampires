@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6620354895045745807}
   - component: {fileID: -4953798366214996530}
   m_Layer: 0
-  m_Name: Sword
+  m_Name: Sword Original
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +160,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4971674781124102739}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
