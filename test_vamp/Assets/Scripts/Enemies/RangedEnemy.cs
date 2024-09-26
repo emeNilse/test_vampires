@@ -12,12 +12,17 @@ public class RangedEnemy : EnemyStats
     private float nextFireTime;
     public GameObject bullet;
     public GameObject bulletParent;
-    
+
+    private ShooterSpeaks _shooterSpeaks;
 
     void Start()
     {
         //player = GameObject.FindGameObjectWithTag("Player").transform;
+        _shooterSpeaks = GetComponent<ShooterSpeaks>();
+        _shooterSpeaks.StartSpeak();
+        
     }
+
 
     public override void UpdateEnemy()
     {
@@ -41,6 +46,12 @@ public class RangedEnemy : EnemyStats
         }
     }
 
+    public override void Dead()
+    {
+        OnKilled.Invoke(this);
+        Effects.SpawnDeathExplosionFX(transform.position);
+        Destroy(gameObject);
+    }
 
     private void OnDrawGizmosSelected()
     {

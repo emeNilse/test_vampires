@@ -36,11 +36,11 @@ public class EnemyStats : MonoBehaviour
             Dead();
         }
     }
-    public void Dead()
+    public virtual void Dead()
     {
-        OnKilled.Invoke(this);
-        Instantiate(explode, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        
+        //Instantiate(explode, transform.position, Quaternion.identity);
+        
     }
 
     private void OnCollisionEnter2D(Collision2D col)

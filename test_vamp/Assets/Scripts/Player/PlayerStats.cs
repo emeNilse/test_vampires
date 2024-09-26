@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class PlayerStats : MonoBehaviour
 {
     public CharacterScriptableObject characterData;
-    // private SpriteFlash _spriteFlash; WHY WON'T THIS WORK????
-    private SpriteRenderer _spriteRenderer;
+    private SpriteFlash _spriteFlash; 
+    //private SpriteRenderer _spriteRenderer;
     public string LevelText
     {
         get => levelText; 
@@ -67,8 +67,8 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        //_spriteFlash = GetComponent<SpriteFlash>();
+        //_spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteFlash = GetComponent<SpriteFlash>();
 
         // assign variables
         currentHealth = characterData.MaxHealth;
@@ -138,7 +138,7 @@ public class PlayerStats : MonoBehaviour
             HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
             invincibilityTimer = invincibilityDuration;
             isInvincible = true;
-            StartCoroutine(FlashCoroutine(invincibilityDuration, flashColor, numberOfFlashes));
+            StartCoroutine(_spriteFlash.FlashCoroutine(invincibilityDuration, flashColor, numberOfFlashes));
             UpdateText();
 
             if (currentHealth <= 0)
@@ -148,35 +148,16 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public IEnumerator FlashCoroutine(float flashDuration, Color flashColor, int numberOfFlashes)
-    {
-        Color startColor = _spriteRenderer.color;
-
-        float elaspedFlashTime = 0;
-        float elaspedFlashPercentage = 0;
-
-        while (elaspedFlashTime < flashDuration)
-        {
-            elaspedFlashTime += Time.deltaTime;
-            elaspedFlashPercentage = elaspedFlashTime / flashDuration;
-
-            if (elaspedFlashPercentage > 1)
-            {
-                elaspedFlashPercentage = 1;
-            }
-
-            float pingPongPercentage = Mathf.PingPong(elaspedFlashPercentage * 2 * numberOfFlashes, 1);
-            _spriteRenderer.color = Color.Lerp(startColor, flashColor, pingPongPercentage);
-
-            yield return null;
-        }
-    }
+   
 
 
     public void Dead()
     {
         Debug.Log("Player is dead");
     }
+
+
+
 
     public void RestoreHealth(float amount)
     {

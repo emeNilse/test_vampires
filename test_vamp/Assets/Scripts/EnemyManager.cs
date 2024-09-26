@@ -62,6 +62,6 @@ public class EnemyManager : MonoBehaviour
             enemies.Remove(e);
         }
 
-        Destroy(e.gameObject);
+        //Destroy(e.gameObject);
     }
 }

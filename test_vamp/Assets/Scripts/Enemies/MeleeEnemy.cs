@@ -9,13 +9,13 @@ public class MeleeEnemy : EnemyStats
     //public Transform player = findplayer;
     public float lineOfSight;
     private bool markedPlayer;
-    Animator am;
+    //Animator am;
     
 
     void Start()
     {
         //player = GameObject.FindGameObjectWithTag("Player").transform;
-        am = GetComponent<Animator>();
+        //am = GetComponent<Animator>();
     }
 
     
@@ -37,7 +37,12 @@ public class MeleeEnemy : EnemyStats
         
     }
 
-    
+    public override void Dead()
+    {
+        OnKilled.Invoke(this);
+        Effects.SpawnDeathFireWorkFX(transform.position);
+        Destroy(gameObject);
+    }
 
     private void OnDrawGizmosSelected()
     {

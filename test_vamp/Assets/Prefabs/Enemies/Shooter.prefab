@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5086581376025174150}
   - component: {fileID: 954343048491719062}
   - component: {fileID: 2417512202658907071}
+  - component: {fileID: 4294323792998901577}
   m_Layer: 0
   m_Name: Shooter
   m_TagString: Enemy
@@ -204,3 +205,18 @@ MonoBehaviour:
   - name: XP Gem
     itemPrefab: {fileID: 1506918838627526434, guid: e4134c858a9db4e4982d7aaeffd7ebe9, type: 3}
     dropRate: 100
+--- !u!114 &4294323792998901577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3617479562865637466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b1bf64d3550224e920f2b430a53bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speechTextPrefab: {fileID: 6713197035561155594, guid: da12f5c1e42710b4494bc7ec099ec38f, type: 3}
+  shooterPrefab: {fileID: 3617479562865637466}
+  textToDisplay: Exterminate!
