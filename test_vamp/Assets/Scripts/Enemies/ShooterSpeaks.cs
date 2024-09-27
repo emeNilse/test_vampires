@@ -5,7 +5,7 @@ using TMPro;
 
 public class ShooterSpeaks : MonoBehaviour
 {
-    public GameObject speechTextPrefab, shooterPrefab;
+    public GameObject speechTextPrefab;
     public string textToDisplay;
 
     public void StartSpeak()

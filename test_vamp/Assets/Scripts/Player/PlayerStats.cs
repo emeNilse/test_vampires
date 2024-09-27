@@ -53,6 +53,9 @@ public class PlayerStats : MonoBehaviour
     public float extraDamage = 5.0f;
     public float addDamage = 0f;
 
+    //Damage taken
+    private FloatingDamage _floatingDamage;
+
     //I-Frames
     [Header("I-Frames")]
     public float invincibilityDuration;
@@ -69,6 +72,8 @@ public class PlayerStats : MonoBehaviour
     {
         //_spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteFlash = GetComponent<SpriteFlash>();
+
+        _floatingDamage = GetComponent<FloatingDamage>();
 
         // assign variables
         currentHealth = characterData.MaxHealth;
@@ -138,8 +143,11 @@ public class PlayerStats : MonoBehaviour
             HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
             invincibilityTimer = invincibilityDuration;
             isInvincible = true;
+
             StartCoroutine(_spriteFlash.FlashCoroutine(invincibilityDuration, flashColor, numberOfFlashes));
+            string damage_text = damage.ToString();
             UpdateText();
+            _floatingDamage.DamageFloat(damage_text);
 
             if (currentHealth <= 0)
             {

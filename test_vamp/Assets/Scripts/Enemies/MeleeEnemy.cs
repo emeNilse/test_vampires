@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class MeleeEnemy : EnemyStats
 {
-    //public EnemyScriptableObject enemyData;
-    //public Transform player = findplayer;
     public float lineOfSight;
     private bool markedPlayer;
     //Animator am;
@@ -14,7 +12,6 @@ public class MeleeEnemy : EnemyStats
 
     void Start()
     {
-        //player = GameObject.FindGameObjectWithTag("Player").transform;
         //am = GetComponent<Animator>();
     }
 
@@ -24,6 +21,7 @@ public class MeleeEnemy : EnemyStats
         //am.SetTrigger("TriggerAnimation"); 
         //this stops the enemy animation, but it is delayed by one loop when pause is activated
         //am.SetBool("BatMove", false);
+
         float distanceFromPlayer = Vector2.Distance(findplayer.position, transform.position);
         if (distanceFromPlayer <= lineOfSight && !markedPlayer)
         {
