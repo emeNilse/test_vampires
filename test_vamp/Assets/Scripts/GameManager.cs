@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,17 +11,26 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null) Debug.LogError("[Enemymanager] Singleton already exists");
         Instance = this;
+        UpgradeMenu upgradePanel = myUpgradeCanvas.GetComponentInChildren<UpgradeMenu>();
+        upgradePanel.OnUpgrade.AddListener(UpgradeChosen);
+        void UpgradeChosen()
+        {
+            myPlayer.didLevelUp = false;
+            State = 0;
+        }
     }
     #endregion
 
     [SerializeField] EnemyManager myEnemyManager;
     [SerializeField] Player myPlayer;
     [SerializeField] GameObject myPauseCanvas;
+    [SerializeField] GameObject myUpgradeCanvas;
 
     public enum GameState
     {
         PlayingState,
-        PauseState
+        PauseState,
+        UpgradeState
     }
 
     int State = 0;
@@ -32,12 +42,17 @@ public class GameManager : MonoBehaviour
             case 0:
                 //Time.timeScale = 1; // I know I shouldn't but I'm frustrated
                 myPauseCanvas.SetActive(false);
+                myUpgradeCanvas.SetActive(false);
                 myPlayer.PlayerUpdate();
                 myEnemyManager.EnemyUpdate();
 
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     State = 1;
+                }
+                else if(myPlayer.didLevelUp)
+                {
+                    State = 2;
                 }
 
                 return;
@@ -51,6 +66,12 @@ public class GameManager : MonoBehaviour
                 }
 
                 return;
+
+            case 2:
+                myUpgradeCanvas.SetActive(true);
+           
+                return;
+
         }
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Player : MonoBehaviour
+public class Player : PlayerStats
 {
     // References
     Rigidbody2D rb;
-    public CharacterScriptableObject characterData;
+    //public CharacterScriptableObject characterData;
     [SerializeField] SwordController sword;
     [SerializeField] CrossBowBehaviour crossbow;
 
@@ -36,7 +36,8 @@ public class Player : MonoBehaviour
         sword.SwordUpdate();
         crossbow.CrossBowUpdate();
         
-            
+
+
         //SwordRotate();
     }
 

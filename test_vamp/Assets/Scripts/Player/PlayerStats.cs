@@ -33,21 +33,22 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] GameObject HealthDisplay;
 
     //current stats
-    float currentHealth;
-    float maxHealth;
-    float currentRecovery;
-    float currentMoveSpeed;
-    float currentMight;
-    float currentProjectileSpeed;
+    public float currentHealth;
+    public float maxHealth;
+    public float currentRecovery;
+    public float currentMoveSpeed;
+    public float currentMight;
 
     [Header("Experience/Level")]
+    public bool didLevelUp = false;
     public int experience = 0;
     public int level = 1;
     public int experienceCap = 100;
     public int experienceCapIncrease;
     public int healthIncrease = 10;
     public int speedIncrease = 1;
-    public int mightIncrease = 2;
+    public float mightIncrease = 2;
+    public float recoveryIncrease = 3;
 
     //add sword damage on level up
     public float extraDamage = 5.0f;
@@ -68,7 +69,7 @@ public class PlayerStats : MonoBehaviour
     private string levelText;
     private string healthText;
 
-    void Start()
+    void Awake()
     {
         //_spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteFlash = GetComponent<SpriteFlash>();
@@ -81,7 +82,6 @@ public class PlayerStats : MonoBehaviour
         currentRecovery = characterData.Recovery;
         currentMoveSpeed = characterData.MoveSpeed;
         currentMight = characterData.Might;
-        currentProjectileSpeed = characterData.ProjectileSpeed;
 
         HealthBar.fillAmount = (float)currentHealth / (float)characterData.MaxHealth;
         XPBar.fillAmount = (float)experience / (float)experienceCap;
@@ -89,8 +89,11 @@ public class PlayerStats : MonoBehaviour
 
         LevelText = "Lvl: " + level.ToString();
         HealthText = "HP: " + currentHealth.ToString() + "/" + maxHealth.ToString();
+
     }
 
+    
+    
     public void IncreaseExperience(int amount)
     {
         experience += amount;
@@ -102,17 +105,40 @@ public class PlayerStats : MonoBehaviour
     {
         if (experience >= experienceCap)
         {
-            level++;
-            experience -= experienceCap;
-            experienceCap += experienceCapIncrease;
-            XPBar.fillAmount = (float)experience / (float)experienceCap;
-            maxHealth += healthIncrease; //Max health increase when level up
-            currentHealth = maxHealth; //full health restored when level up
-            HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
-            UpdateText();
-            addDamage += extraDamage;
+            LevelUp();
+            didLevelUp = true;
         }
     }
+
+    public void LevelUp()
+    {
+        level++;
+        experience -= experienceCap;
+        experienceCap += experienceCapIncrease;
+        XPBar.fillAmount = (float)experience / (float)experienceCap;
+        maxHealth += healthIncrease; //Max health increase when level up
+        currentHealth = maxHealth; //full health restored when level up
+        HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
+        UpdateText();
+        addDamage += extraDamage;
+    }
+
+    public void UpgradeMight()
+    { 
+        currentMight += mightIncrease;
+
+        // Alternative method
+        //UpgradeMenu.OnMightUpgrade.AddListener(UpgradeMight); //=>
+        //{
+        //  currentMight += might;
+        //});
+    }
+
+    public void UpgradeRecovery()
+    {
+        currentRecovery += recoveryIncrease;
+    }
+
 
     public void UpdateText()
     {
