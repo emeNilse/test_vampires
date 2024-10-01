@@ -9,29 +9,46 @@ public class EnemyManager : MonoBehaviour
 
     public List<GameObject> enemyPrefabs;
     [SerializeField] Transform playerPosition;
+    [SerializeField] GameObject itemPrefab;
 
     public float EnemySpawnDistance = 0;
-    public float EnemySpawnrate = 0;
+    public float EnemySpawnrate = 1;
     public float NextEnemySpawn = 0;
+    public float EnemySpawnIncreaseBase = 1;
+    public float EnemySpawnIncreasePercentage = 0.1f;
 
     public void EnemyUpdate()
     {
-        if (NextEnemySpawn >= 0.5)
+        int Level = GameManager.Instance.GetLevel();
+
+        if (NextEnemySpawn >= EnemySpawnrate)
         {
             SpawnEnemy();
             NextEnemySpawn = 0;
         }
         else
         {
-            NextEnemySpawn += Time.deltaTime * EnemySpawnrate;
+            NextEnemySpawn += Time.deltaTime * (EnemySpawnIncreaseBase + ((Level - 1) * EnemySpawnIncreasePercentage));
         }
 
 
         //update bats and towers
         foreach (EnemyStats enemy in enemies)
         {
+            if(!enemy.IsAlive() && enemy.isActiveAndEnabled)
+            {
+                enemy.Despawn();
+                SpawnXPOrb(enemy.transform.position);
+                continue;
+            }
+            
             enemy.UpdateEnemy();
         }
+    }
+
+    public void SpawnXPOrb(Vector3 aPosition)
+    {
+        Instantiate(itemPrefab, aPosition, Quaternion.identity);
     }
 
     public Vector3 SpawnRandom()
@@ -45,14 +62,28 @@ public class EnemyManager : MonoBehaviour
     public void SpawnEnemy()
     {
         Vector3 aPosition = SpawnRandom();
+
         int randEnemy = Random.Range(0, enemyPrefabs.Count);
-        GameObject e = Instantiate(enemyPrefabs[randEnemy], aPosition, Quaternion.identity);
+
+        GameObject EnemyToSpawn = enemyPrefabs[randEnemy];
+
+        foreach (EnemyStats enemy in enemies)
+        { 
+            if (!enemy.isActiveAndEnabled)
+            {
+                enemy.Respawn(aPosition);
+                return;
+            }
+        }
+
+        GameObject e = Instantiate(EnemyToSpawn, aPosition, Quaternion.identity);
         e.GetComponent<EnemyStats>().findplayer = playerPosition; 
         enemies.Add(e.GetComponent<EnemyStats>());
-        e.GetComponent<EnemyStats>().OnKilled.AddListener(EnemyKilled);
+
+        //e.GetComponent<EnemyStats>().OnKilled.AddListener(EnemyKilled);
     }
 
-
+    //This is no longer called as enemies are not destroyed
     public void EnemyKilled(EnemyStats e)
     {
         e.OnKilled.RemoveAllListeners();
@@ -61,7 +92,5 @@ public class EnemyManager : MonoBehaviour
         {
             enemies.Remove(e);
         }
-
-        //Destroy(e.gameObject);
     }
 }

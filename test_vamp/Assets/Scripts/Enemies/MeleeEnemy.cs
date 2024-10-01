@@ -35,6 +35,13 @@ public class MeleeEnemy : EnemyStats
         
     }
 
+    public override void Despawn()
+    {
+        base.Despawn();
+        Effects.SpawnDeathFireWorkFX(transform.position);
+    }
+
+    //Not to be called
     public override void Dead()
     {
         OnKilled.Invoke(this);

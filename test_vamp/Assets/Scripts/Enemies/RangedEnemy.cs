@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class RangedEnemy : EnemyStats
 {
+    //Create bullet list 
+
     //Attack/Action variables
     public float lineOfSight;
     public float shootingRange;
@@ -23,7 +25,6 @@ public class RangedEnemy : EnemyStats
     void Start()
     {
         _shooterSpeaks = GetComponent<ShooterSpeaks>();
-        
     }
 
 
@@ -62,6 +63,13 @@ public class RangedEnemy : EnemyStats
         }
     }
 
+    public override void Despawn()
+    {
+        base.Despawn();
+        Effects.SpawnDeathExplosionFX(transform.position);
+    }
+
+    //Not to be called 
     public override void Dead()
     {
         OnKilled.Invoke(this);

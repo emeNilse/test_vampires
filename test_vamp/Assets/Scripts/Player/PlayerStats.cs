@@ -3,59 +3,19 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class PlayerStats : MonoBehaviour
 {
     public CharacterScriptableObject characterData;
-    private SpriteFlash _spriteFlash; 
-    //private SpriteRenderer _spriteRenderer;
-    public string LevelText
-    {
-        get => levelText; 
-        private set
-        {
-            levelText = value;
-            LevelDisplay.GetComponent<TMP_Text>().text = value;
-        }
-    }
-    public string HealthText
-    {
-        get => healthText;
-        private set
-        {
-            healthText = value;
-            HealthDisplay.GetComponent<TMP_Text>().text = value;
-        }
-    }
-    [SerializeField] Image HealthBar;
-    [SerializeField] Image XPBar;
-    [SerializeField] GameObject LevelDisplay;
-    [SerializeField] GameObject HealthDisplay;
+    public HealthBar myHealthBar;
+    public XPBar myXPBar;
 
-    //current stats
-    public float currentHealth;
-    public float maxHealth;
-    public float currentRecovery;
-    public float currentMoveSpeed;
-    public float currentMight;
-
-    [Header("Experience/Level")]
-    public bool didLevelUp = false;
-    public int experience = 0;
-    public int level = 1;
-    public int experienceCap = 100;
-    public int experienceCapIncrease;
-    public int healthIncrease = 10;
-    public int speedIncrease = 1;
-    public float mightIncrease = 2;
-    public float recoveryIncrease = 3;
-
-    //add sword damage on level up
-    public float extraDamage = 5.0f;
-    public float addDamage = 0f;
-
-    //Damage taken
+    //Damage taken sprites
     private FloatingDamage _floatingDamage;
+
+    //Invincibility flash
+    private SpriteFlash _spriteFlash;
 
     //I-Frames
     [Header("I-Frames")]
@@ -66,8 +26,19 @@ public class PlayerStats : MonoBehaviour
 
     float invincibilityTimer;
     bool isInvincible;
-    private string levelText;
-    private string healthText;
+
+    //current stats
+    public float currentRecovery;
+    public float currentMoveSpeed;
+    public float currentMight;
+
+    public int speedIncrease = 1;
+    public float mightIncrease = 1;
+    public float recoveryIncrease = 3;
+
+    //add sword damage on level up
+    public float extraDamage = 5.0f;
+    public float addDamage = 0f;
 
     void Awake()
     {
@@ -77,136 +48,68 @@ public class PlayerStats : MonoBehaviour
         _floatingDamage = GetComponent<FloatingDamage>();
 
         // assign variables
-        currentHealth = characterData.MaxHealth;
-        maxHealth = characterData.MaxHealth;
         currentRecovery = characterData.Recovery;
         currentMoveSpeed = characterData.MoveSpeed;
         currentMight = characterData.Might;
 
-        HealthBar.fillAmount = (float)currentHealth / (float)characterData.MaxHealth;
-        XPBar.fillAmount = (float)experience / (float)experienceCap;
-
-
-        LevelText = "Lvl: " + level.ToString();
-        HealthText = "HP: " + currentHealth.ToString() + "/" + maxHealth.ToString();
-
+        myHealthBar.UpdateHealthText();
+        myXPBar.UpdateXPText();
+        myXPBar.UpdateHighScoreText();
     }
 
-    
-    
-    public void IncreaseExperience(int amount)
-    {
-        experience += amount;
-        XPBar.fillAmount = (float)experience / (float)experienceCap;
-        LevelUpChecker();
-    }
-
-    public void LevelUpChecker()
-    {
-        if (experience >= experienceCap)
-        {
-            LevelUp();
-            didLevelUp = true;
-        }
-    }
-
-    public void LevelUp()
-    {
-        level++;
-        experience -= experienceCap;
-        experienceCap += experienceCapIncrease;
-        XPBar.fillAmount = (float)experience / (float)experienceCap;
-        maxHealth += healthIncrease; //Max health increase when level up
-        currentHealth = maxHealth; //full health restored when level up
-        HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
-        UpdateText();
-        addDamage += extraDamage;
-    }
-
-    public void UpgradeMight()
-    { 
-        currentMight += mightIncrease;
-
-        // Alternative method
-        //UpgradeMenu.OnMightUpgrade.AddListener(UpgradeMight); //=>
-        //{
-        //  currentMight += might;
-        //});
-    }
-
-    public void UpgradeRecovery()
-    {
-        currentRecovery += recoveryIncrease;
-    }
-
-
-    public void UpdateText()
-    {
-        LevelText = "Lvl: " + level.ToString();
-        HealthText = "HP: " + currentHealth.ToString() + "/" + maxHealth.ToString(); 
-    }
-
+    //Invincibility when taking damage
     void Update()
     {
-        //Invincibility when taking damage
         if (invincibilityTimer > 0)
         {
             invincibilityTimer -= Time.deltaTime;
         }
-        else if(isInvincible)
+        else if (isInvincible)
         {
             isInvincible = false;
         }
     }
 
-    
-
     public void takeDamage(float damage)
     {
         if(!isInvincible)
         {
-            currentHealth -= damage;
-            HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
+            myHealthBar.TakeDamage(damage);
+
             invincibilityTimer = invincibilityDuration;
             isInvincible = true;
 
             StartCoroutine(_spriteFlash.FlashCoroutine(invincibilityDuration, flashColor, numberOfFlashes));
             string damage_text = damage.ToString();
-            UpdateText();
             _floatingDamage.DamageFloat(damage_text);
-
-            if (currentHealth <= 0)
-            {
-                Dead();
-            }
         }
     }
 
-   
-
-
-    public void Dead()
-    {
-        Debug.Log("Player is dead");
-    }
-
-
-
-
+    //Health potion Collectibles
     public void RestoreHealth(float amount)
     {
-        if(currentHealth < maxHealth)
-        {
-            currentHealth += amount;
-            HealthBar.fillAmount = (float)currentHealth / (float)maxHealth;
-            UpdateText();
+        myHealthBar.RestoreHealth(amount);
+    }
+    //XP Points Collectibles
+    public void IncreaseExperience(int amount)
+    {
+        myXPBar.IncreaseExperience(amount);
+    }
 
-            if (currentHealth > maxHealth)
-            {
-                currentHealth = maxHealth;
-                UpdateText();
-            }
-        }
-        
+    public void LevelUp()
+    {
+        // how to connect this, this won't be called anymore
+        addDamage += extraDamage;
+    }
+
+    //Called on Upgrade
+    public void UpgradeMight()
+    {
+        currentMight += mightIncrease;
+    }
+    //Called on Upgrade
+    public void UpgradeRecovery()
+    {
+        currentRecovery += recoveryIncrease;
     }
 }

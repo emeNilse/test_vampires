@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
         upgradePanel.OnUpgrade.AddListener(UpgradeChosen);
         void UpgradeChosen()
         {
-            myPlayer.didLevelUp = false;
             State = 0;
         }
     }
@@ -23,14 +22,23 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] EnemyManager myEnemyManager;
     [SerializeField] Player myPlayer;
+    [SerializeField] XPBar myXPBar;
+    [SerializeField] HealthBar myHealthBar;
     [SerializeField] GameObject myPauseCanvas;
     [SerializeField] GameObject myUpgradeCanvas;
+    [SerializeField] GameObject myGameOverCanvas;
+
+    public int GetLevel()
+    {
+        return myXPBar.level;
+    }
 
     public enum GameState
     {
         PlayingState,
         PauseState,
-        UpgradeState
+        UpgradeState,
+        GameOverState
     }
 
     int State = 0;
@@ -43,6 +51,7 @@ public class GameManager : MonoBehaviour
                 //Time.timeScale = 1; // I know I shouldn't but I'm frustrated
                 myPauseCanvas.SetActive(false);
                 myUpgradeCanvas.SetActive(false);
+                myGameOverCanvas.SetActive(false);
                 myPlayer.PlayerUpdate();
                 myEnemyManager.EnemyUpdate();
 
@@ -50,11 +59,16 @@ public class GameManager : MonoBehaviour
                 {
                     State = 1;
                 }
-                else if(myPlayer.didLevelUp)
+                myXPBar.OnLevelUp.AddListener(PlayerLevelUp);
+                void PlayerLevelUp()
                 {
                     State = 2;
                 }
-
+                myHealthBar.OnDeath.AddListener(PlayerIsDead);
+                void PlayerIsDead()
+                {
+                    State = 3;
+                }
                 return;
 
             case 1:
@@ -64,14 +78,15 @@ public class GameManager : MonoBehaviour
                 {
                     State = 0;
                 }
-
                 return;
 
             case 2:
                 myUpgradeCanvas.SetActive(true);
-           
                 return;
 
+            case 3:
+                myGameOverCanvas.SetActive(true);
+                return;
         }
     }
 }
