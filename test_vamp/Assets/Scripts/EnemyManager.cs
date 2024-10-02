@@ -41,7 +41,6 @@ public class EnemyManager : MonoBehaviour
                 SpawnXPOrb(enemy.transform.position);
                 continue;
             }
-            
             enemy.UpdateEnemy();
         }
     }
@@ -77,13 +76,14 @@ public class EnemyManager : MonoBehaviour
         }
 
         GameObject e = Instantiate(EnemyToSpawn, aPosition, Quaternion.identity);
-        e.GetComponent<EnemyStats>().findplayer = playerPosition; 
+        e.GetComponent<EnemyStats>().findplayer = playerPosition; //Why this works kind of drives me insane. Why can't findplayer be assigned to enemy prefabs?
+        e.GetComponent<EnemyStats>().Initialize(aPosition); //This forces enemy "Start" functions to run, because the standard Start function wouldn't run when enemy spawned
         enemies.Add(e.GetComponent<EnemyStats>());
 
-        //e.GetComponent<EnemyStats>().OnKilled.AddListener(EnemyKilled);
+        //e.GetComponent<EnemyStats>().OnKilled.AddListener(EnemyKilled); No longer needed, but want to keep as reference
     }
 
-    //This is no longer called as enemies are not destroyed
+    //This is no longer called as enemies are not destroyed, but I want to keep it as a reference
     public void EnemyKilled(EnemyStats e)
     {
         e.OnKilled.RemoveAllListeners();

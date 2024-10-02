@@ -26,7 +26,7 @@ public class EnemyStats : MonoBehaviour
 
     }
 
-    public void Initialize(Vector3 aPostion)
+    public virtual void Initialize(Vector3 aPostion)
     {
         gameObject.transform.position = aPostion;
     }

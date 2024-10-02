@@ -7,21 +7,9 @@ public class MeleeEnemy : EnemyStats
 {
     public float lineOfSight;
     private bool markedPlayer;
-    //Animator am;
-    
-
-    void Start()
-    {
-        //am = GetComponent<Animator>();
-    }
-
     
     public override void UpdateEnemy()
     {
-        //am.SetTrigger("TriggerAnimation"); 
-        //this stops the enemy animation, but it is delayed by one loop when pause is activated
-        //am.SetBool("BatMove", false);
-
         float distanceFromPlayer = Vector2.Distance(findplayer.position, transform.position);
         if (distanceFromPlayer <= lineOfSight && !markedPlayer)
         {
@@ -32,7 +20,6 @@ public class MeleeEnemy : EnemyStats
         {
             transform.position = Vector2.MoveTowards(this.transform.position, findplayer.position, enemyData.MoveSpeed * Time.deltaTime);
         }
-        
     }
 
     public override void Despawn()

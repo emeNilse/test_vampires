@@ -28,13 +28,11 @@ public class PlayerStats : MonoBehaviour
     bool isInvincible;
 
     //current stats
-    public float currentRecovery;
     public float currentMoveSpeed;
     public float currentMight;
 
     public int speedIncrease = 1;
-    public float mightIncrease = 1;
-    public float recoveryIncrease = 3;
+    public float mightIncrease = 5;
 
     //add sword damage on level up
     public float extraDamage = 5.0f;
@@ -48,11 +46,10 @@ public class PlayerStats : MonoBehaviour
         _floatingDamage = GetComponent<FloatingDamage>();
 
         // assign variables
-        currentRecovery = characterData.Recovery;
         currentMoveSpeed = characterData.MoveSpeed;
         currentMight = characterData.Might;
 
-        myHealthBar.UpdateHealthText();
+        myHealthBar?.UpdateHealthText();
         myXPBar.UpdateXPText();
         myXPBar.UpdateHighScoreText();
     }
@@ -90,16 +87,11 @@ public class PlayerStats : MonoBehaviour
     {
         myHealthBar.RestoreHealth(amount);
     }
+    
     //XP Points Collectibles
     public void IncreaseExperience(int amount)
     {
         myXPBar.IncreaseExperience(amount);
-    }
-
-    public void LevelUp()
-    {
-        // how to connect this, this won't be called anymore
-        addDamage += extraDamage;
     }
 
     //Called on Upgrade
@@ -107,9 +99,10 @@ public class PlayerStats : MonoBehaviour
     {
         currentMight += mightIncrease;
     }
+    
     //Called on Upgrade
-    public void UpgradeRecovery()
+    public void UpgradeSpeed()
     {
-        currentRecovery += recoveryIncrease;
+        currentMoveSpeed += speedIncrease;
     }
 }

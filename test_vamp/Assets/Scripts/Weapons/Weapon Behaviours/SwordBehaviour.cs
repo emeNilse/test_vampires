@@ -15,7 +15,7 @@ public class SwordBehaviour : MonoBehaviour
     private void Start()
     {
         playerStats = GetComponentInParent<PlayerStats>();
-        addDamage = playerStats.addDamage;
+        addDamage = playerStats.currentMight;
     }
 
     void Update()

@@ -24,11 +24,22 @@ public class cloudMovement : MonoBehaviour
         transform.Translate(Vector3.right * Time.deltaTime * randomSpeed);
     }
 
+    void DespawnCloud()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void RespawnCloud(Vector3 aPosition)
+    { 
+        gameObject.SetActive (true);
+        transform.position = aPosition;
+    }
+
     public void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("EndPoint"))
         {
-            Destroy(gameObject);
+            DespawnCloud();
         }
     }
 }

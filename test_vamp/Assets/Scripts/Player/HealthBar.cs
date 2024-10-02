@@ -28,22 +28,35 @@ public class HealthBar : MonoBehaviour
     public float currentHealth;
     public float maxHealth;
     public int healthIncrease = 10;
+    private float recoveryTimer = 2f;
+    private float currentRecovery;
+    private float recoveryIncrease = 1;
 
     public void Awake()
     {
         currentHealth = characterData.MaxHealth;
         maxHealth = characterData.MaxHealth;
-
-        healthBar.fillAmount = (float)currentHealth / (float)characterData.MaxHealth;
-
+        currentRecovery = characterData.Recovery;
         UpdateHealthText();
+    }
+
+    public void Update()
+    {
+        recoveryTimer -= Time.deltaTime;
+        if (currentHealth < maxHealth && recoveryTimer <= 0)
+        {
+            currentHealth += currentRecovery;
+            UpdateHealthFill();
+            UpdateHealthText();
+            recoveryTimer = 2f;
+        }
     }
 
     public void LevelUpHealth()
     {
         maxHealth += healthIncrease; //Max health increase when level up
         currentHealth = maxHealth; //full health restored when level up
-        healthBar.fillAmount = (float)currentHealth / (float)maxHealth;
+        UpdateHealthFill();
         UpdateHealthText();
     }
 
@@ -51,12 +64,16 @@ public class HealthBar : MonoBehaviour
     {
         HealthText = "HP: " + currentHealth.ToString() + "/" + maxHealth.ToString();
     }
+    public void UpdateHealthFill()
+    {
+        healthBar.fillAmount = (float)currentHealth / (float)maxHealth;
+    }
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        healthBar.fillAmount = (float)currentHealth / (float)maxHealth;
-        UpdateHealthText() ;
+        UpdateHealthFill();
+        UpdateHealthText();
         
         if (currentHealth <= 0)
         {
@@ -75,7 +92,7 @@ public class HealthBar : MonoBehaviour
         if (currentHealth < maxHealth)
         {
             currentHealth += amount;
-            healthBar.fillAmount = (float)currentHealth / (float)maxHealth;
+            UpdateHealthFill();
             UpdateHealthText();
 
             if (currentHealth > maxHealth)
@@ -84,6 +101,11 @@ public class HealthBar : MonoBehaviour
                 UpdateHealthText();
             }
         }
-
+    }
+    
+    //Call on Upgrade
+    public void UpgradeRecovery()
+    {
+        currentRecovery += recoveryIncrease;
     }
 }

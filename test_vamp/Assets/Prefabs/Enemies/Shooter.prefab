@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 954343048491719062}
   - component: {fileID: 2417512202658907071}
   - component: {fileID: 4294323792998901577}
+  - component: {fileID: 4012523876820999200}
   m_Layer: 0
   m_Name: Shooter
   m_TagString: Enemy
@@ -182,13 +183,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   findplayer: {fileID: 0}
-  explode: {fileID: 2417670893398712364, guid: 2ba00c36dc4724a4397065b5d3f435fb, type: 3}
   lineOfSight: 7.16
   shootingRange: 5.9
   runAway: 4.28
   fireRate: 1
-  bullet: {fileID: 4599600454334365823, guid: 448b6f71c6c670949be1468c17de3205, type: 3}
-  bulletParent: {fileID: 1294202657068556720}
+  myBullets: {fileID: 4012523876820999200}
 --- !u!114 &2417512202658907071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,5 +217,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speechTextPrefab: {fileID: 6713197035561155594, guid: da12f5c1e42710b4494bc7ec099ec38f, type: 3}
-  shooterPrefab: {fileID: 3617479562865637466}
   textToDisplay: Exterminate!
+--- !u!114 &4012523876820999200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3617479562865637466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6d8eb64f54ecf4b9133f89466c3d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 4599600454334365823, guid: 448b6f71c6c670949be1468c17de3205, type: 3}
+  bulletParent: {fileID: 3617479562865637466}

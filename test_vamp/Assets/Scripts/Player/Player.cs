@@ -79,7 +79,7 @@ public class Player : PlayerStats
 
     void Move()
     {
-        rb.velocity = new Vector2(moveDir.x * characterData.MoveSpeed, moveDir.y * characterData.MoveSpeed);
+        rb.velocity = new Vector2(moveDir.x * currentMoveSpeed, moveDir.y * currentMoveSpeed);
     }
 
     //void SwordRotate()

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Main Character
   m_EditorClassIdentifier: 
   maxHealth: 100
-  recovery: 0
+  recovery: 1
   moveSpeed: 5
   might: 1
   projectileSpeed: 0

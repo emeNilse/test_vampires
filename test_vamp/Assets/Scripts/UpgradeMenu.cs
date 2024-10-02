@@ -10,6 +10,7 @@ public class UpgradeMenu : MonoBehaviour
     public UnityEvent OnUpgrade;
     public UnityEvent OnMightUpgrade;
     public UnityEvent OnRecoveryUpgrade;
+    public UnityEvent OnSpeedUpgrade;
    
     public void ChooseMightUpgrade()
     {
@@ -20,6 +21,12 @@ public class UpgradeMenu : MonoBehaviour
     public void ChooseRecoveryUpgrade()
     {
         OnRecoveryUpgrade.Invoke();
+        OnUpgrade.Invoke();
+    }
+
+    public void ChooseSpeedUpgrade()
+    {
+        OnSpeedUpgrade.Invoke();
         OnUpgrade.Invoke();
     }
 }
