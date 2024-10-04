@@ -23,6 +23,7 @@ public class UpgradeManager : MonoBehaviour
         ShowUpgrades();
     }
 
+    //when you pick an upgrade
     public void ActivateUpgrade(UpgradeScriptableObjects anUpgrade)
     {
         myPlayer.UpgradePlayer(anUpgrade); // an upgrade script for player

@@ -19,7 +19,7 @@ public class UpgradeState : State
     public override void UpdateState()
     {
         base.UpdateState();
-
+        
         myUpgradeCanvas.SetActive(true);
     }
 }
