@@ -14,6 +14,7 @@ public class UpgradeEditor : EditorWindow
     }
 
     string UpgradeName = "";
+    
 
     private void OnGUI()
     {
@@ -28,7 +29,7 @@ public class UpgradeEditor : EditorWindow
         }
         
         GUILayout.BeginHorizontal();
-
+        
         
         if(GUILayout.Button("Create Upgrade"))
         {
@@ -40,7 +41,8 @@ public class UpgradeEditor : EditorWindow
 
     void CreateObjectInAssests()
     {
-        
+        UpgradeScriptableObjects anUpgrade = CreateInstance<UpgradeScriptableObjects>();
+        //
     }
 
     private void OnEnable()
