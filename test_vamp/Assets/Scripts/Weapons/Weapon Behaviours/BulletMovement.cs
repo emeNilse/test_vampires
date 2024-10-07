@@ -69,5 +69,9 @@ public class BulletMovement : MonoBehaviour
             player.takeDamage(GetDamage()); //make sure to use currentDamage in case of damage multipliers
             DespawnBullet();
         }
+        else if (col.gameObject.CompareTag("Prop"))
+        {
+            DespawnBullet();
+        }
     }
 }

@@ -7,7 +7,6 @@ public class Player : PlayerStats
 {
     // References
     Rigidbody2D rb;
-    //public CharacterScriptableObject characterData;
     [SerializeField] SwordController sword;
     [SerializeField] CrossBowBehaviour crossbow;
 
@@ -26,7 +25,6 @@ public class Player : PlayerStats
     public Vector2 moveDir;
     [HideInInspector]
     public Vector2 lastMovedVector;
-    //[SerializeField] Transform swordParent;
     
     
     void Start()

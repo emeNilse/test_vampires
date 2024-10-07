@@ -39,6 +39,7 @@ public class ArrowMovement : MonoBehaviour
         {
             EnemyStats enemy = col.GetComponent<EnemyStats>();
             enemy.TakeDamage(weaponData.Damage);
+            Effects.SpawnBloodFX(transform.position);
             ReducePierce();
         }
         else if(col.CompareTag("Prop"))

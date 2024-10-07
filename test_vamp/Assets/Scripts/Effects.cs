@@ -13,4 +13,9 @@ public class Effects : MonoBehaviour
     {
         Instantiate(Resources.Load<GameObject>("FireWorkParticles"), aPosition, Quaternion.identity);
     }
+
+    public static void SpawnBloodFX(Vector3 aPosition)
+    {
+        Instantiate(Resources.Load<GameObject>("Blood"), aPosition, Quaternion.identity);
+    }
 }

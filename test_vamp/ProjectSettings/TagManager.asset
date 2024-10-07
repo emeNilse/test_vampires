@@ -7,15 +7,17 @@ TagManager:
   - Enemy
   - Prop
   - EndPoint
+  - Projectile
+  - Porjectile
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - Terrain
-  - 
+  - Pick Ups
   - 
   - 
   - 

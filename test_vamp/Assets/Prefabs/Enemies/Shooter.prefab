@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5142081594538705887}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BulletParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 2417512202658907071}
   - component: {fileID: 4294323792998901577}
   - component: {fileID: 4012523876820999200}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Shooter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -187,7 +187,6 @@ MonoBehaviour:
   shootingRange: 5.9
   runAway: 4.28
   fireRate: 1
-  myBullets: {fileID: 4012523876820999200}
 --- !u!114 &2417512202658907071
 MonoBehaviour:
   m_ObjectHideFlags: 0
