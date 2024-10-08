@@ -9,6 +9,7 @@ public class ExperienceGem : MonoBehaviour, ICollectible
     Rigidbody2D rb;
     Vector3 targetPosition;
     bool hasTarget;
+    int level;
 
     private void Awake()
     {

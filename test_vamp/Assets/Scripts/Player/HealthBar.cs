@@ -84,6 +84,7 @@ public class HealthBar : MonoBehaviour
     public void Dead()
     {
         OnDeath.Invoke();
+        //Effects.SpawnPlayerBloodFX(transform.position);
         Debug.Log("Player is dead");
     }
 

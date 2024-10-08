@@ -8,6 +8,7 @@ public class EnemyStats : MonoBehaviour
     public EnemyScriptableObject enemyData;
     public UnityEvent<EnemyStats> OnKilled;
     public Transform findplayer;
+    private DropRateManager dropRateManager;
 
     //current stats
     float currentMoveSpeed;
@@ -19,6 +20,7 @@ public class EnemyStats : MonoBehaviour
         currentMoveSpeed = enemyData.MoveSpeed;
         currentHealth = enemyData.MaxHealth;
         currentDamage = enemyData.Damage;
+        dropRateManager = GetComponent<DropRateManager>();
     }
 
     public virtual void UpdateEnemy()
@@ -41,6 +43,7 @@ public class EnemyStats : MonoBehaviour
     public virtual void Despawn()
     {
         gameObject.SetActive(false);
+        dropRateManager.OnDespawn();
     }
 
     public void TakeDamage(float dmg)

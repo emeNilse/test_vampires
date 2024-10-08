@@ -65,6 +65,8 @@ public class PlayerStats : MonoBehaviour
         {
             isInvincible = false;
         }
+        
+        //myHealthBar.OnDeath.AddListener(PlayerDied);
     }
 
     public void takeDamage(float damage)
@@ -80,6 +82,12 @@ public class PlayerStats : MonoBehaviour
             string damage_text = damage.ToString();
             _floatingDamage.DamageFloat(damage_text);
         }
+    }
+
+    
+    void PlayerDied()
+    {
+        Effects.SpawnPlayerBloodFX(transform.position);
     }
 
     //Health potion Collectibles

@@ -5,6 +5,12 @@ using UnityEngine;
 public class BreakableProps : MonoBehaviour
 {
     public float health;
+    private DropRateManager dropRateManager;
+
+    private void Awake()
+    {
+        dropRateManager = GetComponent<DropRateManager>();
+    }
 
     public void TakeDamage(float damage)
     {
@@ -13,6 +19,7 @@ public class BreakableProps : MonoBehaviour
         if (health <= 0)
         {
             Break();
+            dropRateManager.OnDespawn();
         }
     }
 

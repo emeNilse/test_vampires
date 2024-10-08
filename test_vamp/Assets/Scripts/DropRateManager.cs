@@ -14,7 +14,7 @@ public class DropRateManager : MonoBehaviour
 
     public List<Drops> drops;
 
-    private void OnDestroy()
+    public void OnDespawn()
     {
         float randomNumber = Random.Range(0f, 100f);
         List<Drops> possibleDrops = new List<Drops>();

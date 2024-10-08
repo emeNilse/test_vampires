@@ -38,7 +38,7 @@ public class EnemyManager : MonoBehaviour
             if(!enemy.IsAlive() && enemy.isActiveAndEnabled)
             {
                 enemy.Despawn();
-                SpawnXPOrb(enemy.transform.position);
+                //SpawnXPOrb(enemy.transform.position);
                 continue;
             }
             enemy.UpdateEnemy();
