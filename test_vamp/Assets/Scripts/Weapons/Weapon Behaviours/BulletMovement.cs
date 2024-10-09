@@ -11,25 +11,27 @@ public class BulletMovement : MonoBehaviour
     public WeaponsScriptableObjects weaponData;
     Rigidbody2D bulletRB;
     Vector2 moveDir;
-    float lifeSpan = 2.0f;
+    public float lifeSpan = 2.0f;
+    float currentLife;
 
     public void Start()
     {
         bulletRB = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player");
+        currentLife = lifeSpan;
         Shot();
         
     }
     public void Update() //this is how I stop the bullets in pause without timescale
     {
-        lifeSpan -= Time.deltaTime;
+        currentLife -= Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale != 0f)
         {
             bulletRB.velocity = new Vector2(0f, 0f);
         }
 
-        if(lifeSpan <= 0f)
+        if(currentLife <= 0f)
         {
             DespawnBullet();
         }
@@ -51,7 +53,7 @@ public class BulletMovement : MonoBehaviour
         gameObject.SetActive(true);
         gameObject.transform.position = aPosition;
         Shot();
-        lifeSpan = 2f;
+        currentLife = lifeSpan;
     }
 
     public float GetDamage()
