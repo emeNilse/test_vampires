@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    // Not being used. This was just the first spawner I created before having Enemy Manager take care of spawning
+    
     [SerializeField] GameObject swarmPrefab;
     [SerializeField] GameObject shooterPrefab;
 
